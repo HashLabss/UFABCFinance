@@ -1,11 +1,12 @@
 import Head from 'next/head';
-import partyChainContract from '../../../contractInstances/partychain';
+import financeContract from '../../../contractInstances/finance';
 import web3 from '../../../contractInstances/web3';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 const Events = ({ eventos }) => {
+    console.log(eventos);
     const toggleMenu = () => {
         var menu = document.getElementById('filter-menu');
         if (menu.style.display === 'block') {
@@ -43,18 +44,16 @@ const Events = ({ eventos }) => {
     const filteredData = filterDataByNameAndCategory(eventos, svalue, fvalue);
 
     const items = filteredData.map((item, index) => {
-        const partes = item[8].split(/[-T]/);
+        // const partes = item[8].split(/[-T]/);
 
         return (
             <div key={index}>
-                <Link href={`/events/${item[0]}`}>
+                <Link href={`/events/${item[1]}`}>
                     <div className="h-full p-3 bg-primary/50 rounded-2xl flex flex-col">
-                        <img src={item[10]} alt="Imagem" className="mb-4 rounded-2xl w-full h-48 object-cover"></img>
-                        <p>
-                            Date: {partes[2]}/{partes[1]}/{partes[0]}
-                        </p>
-                        <p className="font-bold text-3xl mb-4">{item[1]}</p>
-                        <p>Location: {item[7]}</p>
+                        <p>ID {item[1]}</p>
+                        <p className="font-bold text-3xl mb-4">{item[0]}</p>
+                        <p>Owner: {item[2]}</p>
+                        <p>Prize: {item[5]}</p>
                     </div>
                 </Link>
             </div>
@@ -191,8 +190,9 @@ const Events = ({ eventos }) => {
 };
 
 export const getServerSideProps = async () => {
-    const instance = partyChainContract(web3);
-    const eventos = await instance.methods.getParties().call();
+    const instance = financeContract(web3);
+    const eventos = await instance.methods.getGames().call();
+    console.log(eventos);
 
     return { props: { eventos } };
 };

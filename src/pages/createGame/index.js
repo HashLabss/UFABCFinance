@@ -1,75 +1,47 @@
 // import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-// import web3 from '../../contractInstances/web3'
-// import partyChainContract from '../../../contractInstances/partychain';
+import web3 from '../../../contractInstances/web3';
+import financeContract from '../../../contractInstances/finance';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
-import Web3 from 'web3';
-
-
-
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-
-const PROJECT = process.env.NEXT_PUBLIC_PROJECT_ID;
+// import Web3 from 'web3';
 
 export default function CreateGame() {
     // const fs = require('fs')
-    const [name, setName] = useState('');
-    
-    const [score, setScore] = useState('');
-    
-    const [privateKey, setPrivateKey] = useState('');
-    const [accounts, setAccounts] = useState('');
+    const [name, setName] = useState();
+
+    const [score, setScore] = useState();
+
     const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    
+    // useEffect(() => {
+    //     if (typeof window !== 'undefined') {
+    //         const address = localStorage.getItem('address');
+    //         const privKey = localStorage.getItem('privateKey');
+    //         setAccounts(address);
+    //         setPrivateKey(privKey);
+    //     }
 
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const address = localStorage.getItem('address');
-            const privKey = localStorage.getItem('privateKey');
-            setAccounts(address);
-            setPrivateKey(privKey);
-        }
-        
-    }, []);
+    // }, []);
 
     const createEventHandller = async () => {
         setIsLoading(true);
         try {
-            const url = `https://polygon-mumbai.infura.io/v3/${PROJECT}`;
-            const provider = new HDWalletProvider(privateKey, url);
-            const web = await new Web3(provider);
-            const instance = partyChainContract(web);
-            // const address = await web3.eth.getAccounts()
+            // console.log(address[0]);
+            console.log(name, score);
+            const instance = await financeContract(web3);
+            const address = await web3.eth.getAccounts();
 
-            const pinata = await uploadToServer();
-            const ipfsHash = pinata.data.resultado.IpfsHash;
-            const link = `https://gateway.pinata.cloud/ipfs/${ipfsHash}`;
-            console.log(ipfsHash);
-            const ethPrice = web.utils.toWei(price, 'ether');
-            const data = await instance.methods
-                .createEvent(name, numQuestion, description, ethPrice, link)
-                .send({
-                    from: accounts,
-                });
-            console.log(data.events.returnValues);
+            await instance.methods.createGame(name, score).send({ from: address[0] });
             setIsLoading(false);
             setShowConfirmationPopup(false);
             // alert('Evento criado com sucesso!');
-            window.location.assign(`/events`);
         } catch (error) {
             alert(error);
             setIsLoading(false);
             setShowConfirmationPopup(false);
         }
-    };
-
-    const uploadToServer = async () => {
-        const formData = new FormData();
-        formData.append('file', file);
-        return axios.post('/api/image2', formData);
     };
 
     const containerVariants = {
@@ -122,8 +94,6 @@ export default function CreateGame() {
                                     className="w-full bg-base border-cbase focus:outline-none  focus:border-cprimary border-solid border-2 rounded-2xl p-3 placeholder:italic"
                                 />
                             </div>
-
-                            
 
                             <motion.button
                                 type="submit"
