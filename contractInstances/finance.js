@@ -1,4 +1,4 @@
-const address = '0xBd55427ba51FfF685f5ca6fEa3F16867d6F4F817';
+const address = '0xc3a3ae9070140363AB704b446109010a9D318353';
 const { abi } = require('../build/contracts/Finance.json');
 
 const financeContract = (web3) => {

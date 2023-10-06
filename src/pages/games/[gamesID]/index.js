@@ -2,32 +2,49 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import financeContract from '../../../../contractInstances/finance';
 import web3 from '../../../../contractInstances/web3';
 import Web3 from 'web3';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const GamesId = () => {
-    const questions = [
-        {
-            question: 'Qual é a capital do Brasil?',
-            options: ['Rio de Janeiro', 'São Paulo', 'Brasília', 'Salvador', 'Recife'],
-            correctAnswer: 'Brasília',
-        },
-        {
-            question: 'Qual é o maior planeta do sistema solar?',
-            options: ['Terra', 'Júpiter', 'Vênus', 'Marte', 'Saturno'],
-            correctAnswer: 'Júpiter',
-        },
-        // Adicione mais questões aqui
-    ];
+const GamesId = ({ evento, quests, participants1, participants2 }) => {
+    console.log(`Questoes: ${quests}`);
+    console.log(`Evento: ${evento}`);
+    console.log(`ParticipantsAddrList: ${participants2}`);
+    console.log(`ParticipantsObjList: ${participants1}`);
+    const router = useRouter();
+    const gamesId = router.query.gamesID;
+    let questions = [];
+    quests.map((item, index) => {
+        const obj = {
+            question: item[0],
+            options: item[1],
+            correctAnswer: item[2],
+        };
+        questions.push(obj);
+    });
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [ansewerIndex, setAnsewerIndex] = useState(0);
 
-    const handleNextQuestion = () => {
+    const handleNextQuestion = async () => {
+        const instance = financeContract(web3);
+        const accounts = await web3.eth.getAccounts();
+        console.log(`GameId: ${gamesId}`);
+        console.log(`QuestionId: ${currentQuestion}`);
+        console.log(`Resposta: ${ansewerIndex}`);
+        await instance.methods.answerQuestion(gamesId, currentQuestion, ansewerIndex).send({ from: accounts[0] });
+
         if (currentQuestion < questions.length - 1) {
             setCurrentQuestion(currentQuestion + 1);
         }
+    };
+
+    const ansewerQuestion = async () => {
+        const instance = financeContract(web3);
+        const accounts = await web3.eth.getAccounts();
+        await instance.methods.answerQuestion(gamesId);
     };
 
     const handlePreviousQuestion = () => {
@@ -64,7 +81,14 @@ const GamesId = () => {
                                 <ul className="p-4">
                                     {questions[currentQuestion].options.map((option, index) => (
                                         <li key={index}>
-                                            <input type="radio" name="option" className="mr-2 my-4 " />
+                                            <input
+                                                type="radio"
+                                                name="option"
+                                                className="mr-2 my-4 "
+                                                onChange={() => {
+                                                    setAnsewerIndex(index);
+                                                }}
+                                            />
                                             {option}
                                         </li>
                                     ))}
@@ -93,7 +117,9 @@ const GamesId = () => {
                                         Próxima
                                     </motion.button>
                                 )}
-                                {currentQuestion === questions.length - 1 && <button>Enviar</button>}
+                                {currentQuestion === questions.length - 1 && (
+                                    <button onClick={handleNextQuestion}>Enviar</button>
+                                )}
                             </div>
                         </div>
                     </motion.div>
@@ -101,6 +127,23 @@ const GamesId = () => {
             </section>
         </>
     );
+};
+
+export const getServerSideProps = async ({ query }) => {
+    const instance = financeContract(web3);
+    const eventID = query.gamesID;
+    const evento = await instance.methods.getGame(eventID).call();
+    const participants = await instance.methods.getParticipants(eventID).call();
+    const participants1 = participants[0];
+    const participants2 = participants[1];
+    console.log(participants1);
+    console.log(participants2);
+    const quests = await instance.methods.getGameQuestions(eventID).call();
+    console.log(evento);
+    console.log(quests);
+    console.log(participants);
+
+    return { props: { evento, quests, participants1, participants2 } };
 };
 
 export default GamesId;
