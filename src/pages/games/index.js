@@ -20,6 +20,7 @@ const Events = ({ eventos }) => {
     const [svalue, setSvalue] = useState('');
     const [fcategory, setFcategory] = useState('');
     const [fvalue, setFvalue] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
 
     const filterDataByNameAndCategory = (data, name, category) => {
         return data.filter((item) => {
@@ -43,19 +44,50 @@ const Events = ({ eventos }) => {
 
     const filteredData = filterDataByNameAndCategory(eventos, svalue, fvalue);
 
+    
+
     const items = filteredData.map((item, index) => {
         // const partes = item[8].split(/[-T]/);
 
         return (
             <div key={index}>
-                <Link href={`/events/${item[1]}`}>
+                <button onClick={() => {setShowPopup(true)}}>
                     <div className="h-full p-3 bg-primary/50 rounded-2xl flex flex-col">
                         <p>ID {item[1]}</p>
                         <p className="font-bold text-3xl mb-4">{item[0]}</p>
                         <p>Owner: {item[2]}</p>
                         <p>Prize: {item[5]}</p>
                     </div>
-                </Link>
+                </button>
+                {showPopup && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-xl">
+                    <div className="bg-base p-6 rounded-2xl shadow-md w-5/6 max-w-xl">
+                        <p className="text-lg font-semibold mb-4 text-center">
+                            Deseja participar do game {item[0]} ?
+                        </p>
+                        <p className="text-lg font-semibold mb-4 text-center">
+                            N° de questões: {item[3]}	
+                        </p>
+                        <p className="text-lg font-semibold mb-4 text-center">
+                            Prize: {item[5]}
+                        </p>
+                        <div className="flex justify-center space-x-4">
+                            <Link href={`/games/${item[1]}`} 
+                                
+                                className="px-4 py-2 bg-cprimary text-white rounded-2xl hover:bg-primary active:bg-cprimary focus:outline-none"
+                            >
+                                Participar
+                            </Link>
+                            <button
+                                onClick={() => setShowPopup(false)}
+                                className="px-4 py-2 text-white rounded-2xl hover:bg-dbase focus:outline-none"
+                            >
+                                Fechar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                )}
             </div>
         );
     });
@@ -70,7 +102,7 @@ const Events = ({ eventos }) => {
             <Head>
                 <meta charSet="utf-8" />
                 <meta name="PartyChain" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-                <title>PartyChain | Events</title>
+                <title>UFABC Finance</title>
             </Head>
 
             <section className="py-28 px-4 flex flex-col items-center justify-center min-h-screen bg-[url(../../public/images/backgroundlines.png)] bg-cover bg-fixed bg-center">
@@ -184,6 +216,7 @@ const Events = ({ eventos }) => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">{items}</div>
                     </div>
                 </motion.div>
+                
             </section>
         </>
     );

@@ -11,7 +11,7 @@ export default function Home() {
             <Head>
                 <meta charSet="utf-8" />
                 <meta name="EventChain" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-                <title>EventChain | Home</title>
+                <title>UFABC Finance</title>
             </Head>
             <main className="flex min-h-screen flex-col items-center justify-between bg-[url(../../public/images/mainbackground.jpg)] bg-cover bg-fixed bg-bottom">
                 <HeroSection />

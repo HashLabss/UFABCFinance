@@ -57,7 +57,7 @@ const ProfileID = ({ data }) => {
             <Head>
                 <meta charSet="utf-8" />
                 <meta name="PartyChain" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-                <title>PartyChain | Profile</title>
+                <title>UFABC Finance</title>
             </Head>
 
             <div className="min-h-screen flex justify-center w-full bg-[url(../../public/images/backgroundlines.png)] bg-cover bg-fixed bg-center ">
