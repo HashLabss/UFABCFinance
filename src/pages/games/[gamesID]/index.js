@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import financeContract from '../../../../contractInstances/finance';
 import web3 from '../../../../contractInstances/web3';
-import Web3 from 'web3';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
@@ -52,12 +51,6 @@ const GamesId = ({ evento, quests, participants1, participants2 }) => {
         if (currentQuestion < questions.length - 1) {
             setCurrentQuestion(currentQuestion + 1);
         }
-    };
-
-    const ansewerQuestion = async () => {
-        const instance = financeContract(web3);
-        const accounts = await web3.eth.getAccounts();
-        await instance.methods.answerQuestion(gamesId);
     };
 
     const handlePreviousQuestion = () => {

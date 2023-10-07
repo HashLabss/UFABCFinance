@@ -82,10 +82,7 @@ const Navbar = () => {
                                 <Link href="/" className="hover:bg-cbase font-bold px-3 py-2 rounded-2xl ">
                                     Home
                                 </Link>
-                                
-                                <Link href="/test" className="hover:bg-cbase font-bold px-3 py-2 rounded-2xl ">
-                                    About
-                                </Link>
+
                                 <Link href="/games" className="hover:bg-cbase font-bold px-3 py-2 rounded-2xl ">
                                     Games
                                 </Link>
@@ -109,7 +106,7 @@ const Navbar = () => {
                                 <Link href="/createGame" className="hover:bg-cbase font-bold px-3 py-2 rounded-2xl">
                                     Create Game
                                 </Link>
-                                
+
                                 <WalletButton />
                                 {/* <Auth /> */}
                             </div>
@@ -162,14 +159,7 @@ const Navbar = () => {
                         >
                             Home
                         </Link>
-                        
-                        <Link
-                            onClick={toggleNavbar}
-                            href="/test"
-                            className="w-full font-bold text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-2xl text-base  text-center"
-                        >
-                            About
-                        </Link>
+
                         <Link
                             onClick={toggleNavbar}
                             href="/games"
@@ -218,7 +208,7 @@ const Navbar = () => {
                         >
                             Create Game
                         </Link>
-                        
+
                         <WalletButton myPropFunction={toggleNavbar} />
                         {/* <Auth myPropFunction={toggleNavbar} /> */}
                     </div>
