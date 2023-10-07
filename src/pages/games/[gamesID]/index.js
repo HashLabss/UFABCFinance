@@ -13,6 +13,19 @@ const GamesId = ({ evento, quests, participants1, participants2 }) => {
     console.log(`Evento: ${evento}`);
     console.log(`ParticipantsAddrList: ${participants2}`);
     console.log(`ParticipantsObjList: ${participants1}`);
+
+    const [score, setScore] = useState(0);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const instance = financeContract(web3);
+            const accounts = await web3.eth.getAccounts();
+            const myScore = await instance.methods.getScore(gamesId).call({ from: accounts[0] });
+            setScore(myScore);
+        };
+        fetchData();
+    }, []);
+
     const router = useRouter();
     const gamesId = router.query.gamesID;
     let questions = [];
@@ -69,7 +82,7 @@ const GamesId = ({ evento, quests, participants1, participants2 }) => {
                 <motion.div variants={containerVariants} className="w-full container bg-dbase rounded-2xl px-8 py-4">
                     <motion.div variants={containerVariants} className="flex flex-col gap-6    rounded-2xl">
                         <div className="flex justify-around items-center border-b-2 border-base py-4">
-                            <h1>Nome Jogo </h1>
+                            <h1>{evento[0]} </h1>
                             <h1>Questões</h1>
                         </div>
                         <div className="flex p-4 w-full justify-between">
@@ -136,12 +149,12 @@ export const getServerSideProps = async ({ query }) => {
     const participants = await instance.methods.getParticipants(eventID).call();
     const participants1 = participants[0];
     const participants2 = participants[1];
-    console.log(participants1);
-    console.log(participants2);
     const quests = await instance.methods.getGameQuestions(eventID).call();
     console.log(evento);
     console.log(quests);
     console.log(participants);
+    console.log(participants1);
+    console.log(participants2);
 
     return { props: { evento, quests, participants1, participants2 } };
 };
