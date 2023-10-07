@@ -1,4 +1,4 @@
-const address = '0xfc540CeE433B369Dc29D3C803243E61Cfa672a27'; //0xfc540CeE433B369Dc29D3C803243E61Cfa672a27 esse e o mais atualizado
+const address = '0x11DE8a7274d2d04d95C5904B585E79472D4f241B';
 const { abi } = require('../build/contracts/Finance.json');
 
 const financeContract = (web3) => {
