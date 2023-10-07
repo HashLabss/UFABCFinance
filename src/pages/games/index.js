@@ -69,7 +69,7 @@ const Events = ({ eventos }) => {
                     <div className="h-full p-3 bg-primary/50 rounded-2xl flex flex-col">
                         <p>ID {item[1]}</p>
                         <p className="font-bold text-3xl mb-4">{item[0]}</p>
-                        <p>Owner: {item[2]}</p>
+                        <p className="truncate">Owner: {item[2]}</p>
                         <p>Prize: {item[5]}</p>
                     </div>
                 </button>
