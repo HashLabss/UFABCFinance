@@ -26,14 +26,14 @@ body {
 }
 
 /* Estilizando a barra de rolagem */
-.overflow-y-scroll::-webkit-scrollbar {
+.overflow-auto::-webkit-scrollbar {
     width: 6px;
-    background-color: #480063;
+    background-color: #63000d;
 }
 
 /* Estilizando o polegar da barra de rolagem */
-.overflow-y-scroll::-webkit-scrollbar-thumb {
-    background-color: #C936FF;
+.overflow-auto::-webkit-scrollbar-thumb {
+    background-color: #ff0015;
     border-radius: 4px;
 }
 

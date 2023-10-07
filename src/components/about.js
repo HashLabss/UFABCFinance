@@ -15,7 +15,7 @@ const About = () => {
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2, duration: 0.5 }}
                 >
-                    One of the first real use blockchain dapps
+                    Lifes short playhard
                 </motion.h2>
             </div>
             <div className="w-full mx-auto px-20 max-w-screen-2xl grid grid-cols-1 md:grid-cols-2">
@@ -33,7 +33,7 @@ const About = () => {
                                 whileInView={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.6, duration: 0.5 }}
                             >
-                                Create and participate in decentralized events
+                                Historia
                             </motion.h1>
                             <motion.p
                                 className="mt-4"
@@ -41,8 +41,10 @@ const About = () => {
                                 whileInView={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.8, duration: 0.5 }}
                             >
-                                Decentralization in events aims to empower individuals, remove intermediaries, increase
-                                transparency, and foster a more inclusive and equitable event ecosystem.
+                                Fundada em agosto de 2013, a Liga de Mercado Financeiro da UFABC tem como principal
+                                objetivo integrar a comunidade acadêmica ao mercado financeiro, tornando-se um local em
+                                que os membros de diferentes cursos podem se unir para o compartilhamento e a evolução
+                                do conhecimento acerca do mercado.
                             </motion.p>
                         </div>
                         <div className="w-full border-b border-solid border-white/20 h-20 border-0 md:border-b"></div>
@@ -62,7 +64,7 @@ const About = () => {
                                 whileInView={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.6, duration: 0.5 }}
                             >
-                                Control the secondary market of tickets
+                                Missão
                             </motion.h1>
                             <motion.p
                                 className="mt-4"
@@ -70,10 +72,9 @@ const About = () => {
                                 whileInView={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.8, duration: 0.5 }}
                             >
-                                Regulate and manage the resale of event tickets on secondary platforms or marketplaces.
-                                In traditional ticketing systems, once tickets are sold, the original seller loses
-                                control over their subsequent sale and pricing, which can lead to scalping, price
-                                gouging, and other unfair practices.
+                                Integrar o mercado financeiro à comunidade acadêmica da UFABC através de atividades
+                                direcionadas à formação de profissionais devidamente capacitados para atuação nas áreas
+                                de finanças.
                             </motion.p>
                         </div>
                         <div className="w-full border-b border-solid border-white/20 h-20 border-0 md:border-b"></div>
@@ -93,7 +94,7 @@ const About = () => {
                                 whileInView={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.6, duration: 0.5 }}
                             >
-                                Gamefy events
+                                Visão
                             </motion.h1>
                             <motion.p
                                 className="mt-4"
@@ -101,10 +102,9 @@ const About = () => {
                                 whileInView={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.8, duration: 0.5 }}
                             >
-                                Gamifying or turning events into interactive and engaging experiences inspired by games.
-                                In Gamefy events, elements commonly found in games, such as competition, challenges,
-                                rewards, and progression, are incorporated into various types of events, including
-                                conferences, workshops, team-building activities, and marketing campaigns.
+                                Contribuir para o desenvolvimento pessoal e profissional dos alunos da UFABC, para que
+                                estes atinjam excelência de modo a difundir a universidade como referência no mercado
+                                financeiro.
                             </motion.p>
                         </div>
                         <div className="w-full border-0 border-solid border-white/20 h-20 border-b md:border-0"></div>
@@ -124,7 +124,7 @@ const About = () => {
                                 whileInView={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.6, duration: 0.5 }}
                             >
-                                Avoid scalpers
+                                Valores
                             </motion.h1>
                             <motion.p
                                 className="mt-4"
@@ -132,9 +132,8 @@ const About = () => {
                                 whileInView={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.8, duration: 0.5 }}
                             >
-                                Preventing or discouraging the activities of ticket scalpers or ticket resellers who
-                                engage in unethical or illegal practices to profit from selling tickets at inflated
-                                prices.
+                                O pilar de valores é sustentado por fatores aos quais se destacam: cooperação, esforço,
+                                iniciativa, versatilidade e boa vontade.
                             </motion.p>
                         </div>
                         <div className="w-full border-0 border-solid border-white/20 h-20 border-b md:border-0"></div>
